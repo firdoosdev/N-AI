@@ -1,6 +1,7 @@
 import time
 import timeout_decorator
-
+import subprocess
+import os
 
 @timeout_decorator.timeout(5, timeout_exception=TimeoutError)
 def runA(algorithm, node, h):
@@ -59,3 +60,37 @@ def printAllSolutions(alg, sol, vst, deep, tm, fal, h=None):
         print(" Avg taken time: {} ".format(sum(tm) / len(tm)), end='')
     print(" Failed: {} ".format(fal), end='')
     print("")
+
+
+@timeout_decorator.timeout(20, timeout_exception=TimeoutError)
+def runDpll(algorithm, s):
+    try:
+        a = algorithm(s)
+    except TimeoutError:
+        raise TimeoutError
+    else:
+        return a
+
+@timeout_decorator.timeout(20, timeout_exception=TimeoutError)
+# def runSAT():
+#     try:
+#         a = timeit(stmt="{}".format(subprocess.call(["./minisat", "example.cnf", "test.out"], stdout=subprocess.DEVNULL)))
+#     except TimeoutError:
+#         raise TimeoutError
+#     else:
+#         return a
+
+def run_command():
+    with open(os.devnull, 'w') as devnull:
+        subprocess.call(["./minisat", "example.cnf", "test.out"], stdout=devnull, stderr=devnull)
+
+def runSAT():
+    try:
+        start_time = time.time()
+        run_command()
+        end_time = time.time()
+        time_taken = end_time - start_time
+    except TimeoutError:
+        raise TimeoutError
+    else:
+        return time_taken
