@@ -71,7 +71,7 @@ def runDpll(algorithm, s):
     else:
         return a
 
-@timeout_decorator.timeout(20, timeout_exception=TimeoutError)
+# @timeout_decorator.timeout(20, timeout_exception=TimeoutError)
 # def runSAT():
 #     try:
 #         a = timeit(stmt="{}".format(subprocess.call(["./minisat", "example.cnf", "test.out"], stdout=subprocess.DEVNULL)))
@@ -80,6 +80,7 @@ def runDpll(algorithm, s):
 #     else:
 #         return a
 
+@timeout_decorator.timeout(20, timeout_exception=TimeoutError)
 def run_command():
     with open(os.devnull, 'w') as devnull:
         subprocess.call(["./minisat", "example.cnf", "test.out"], stdout=devnull, stderr=devnull)

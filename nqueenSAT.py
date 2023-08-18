@@ -78,7 +78,7 @@ def at_least():
 
 if __name__ == '__main__':
     dpll_time_out = False
-    for size in range(4, 25):
+    for size in range(4, 15):
         BOARD_SIZE = size
         lst = list()
         lst.append(at_most_one_q_row())
