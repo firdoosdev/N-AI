@@ -12,3 +12,4 @@ keras
 numpy
 tensorflow
 opencv-python
+werkzeug>=3.0.3 # not directly required, pinned by Snyk to avoid a vulnerability
