@@ -12,3 +12,4 @@ keras
 numpy
 tensorflow
 opencv-python
+django>=4.2.15 # not directly required, pinned by Snyk to avoid a vulnerability
